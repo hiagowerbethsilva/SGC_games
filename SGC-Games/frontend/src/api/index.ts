@@ -1,0 +1,6 @@
+export { apiRequest } from './client'
+export { usuariosApi } from './usuarios'
+export { clientesApi } from './clientes'
+export { produtosApi } from './produtos'
+export { vendasApi } from './vendas'
+export { relatoriosApi } from './relatorios'

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGC Games</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="toast" class="toast hidden"></div>
+
+    <section id="login-screen" class="login-screen">
+        <div class="login-card">
+            <div class="brand">
+                <div class="logo">SG</div>
+                <div>
+                    <h1>SGC Games</h1>
+                    <p>Sistema simples de gestão comercial</p>
+                </div>
+            </div>
+
+            <form id="login-form" class="form-grid single">
+                <label>
+                    Usuário
+                    <input id="login-username" type="text" placeholder="admin" required>
+                </label>
+                <label>
+                    Senha
+                    <input id="login-senha" type="password" placeholder="123456" required>
+                </label>
+                <button type="submit" class="primary">Entrar</button>
+            </form>
+
+            <details class="register-box">
+                <summary>Criar usuário inicial</summary>
+                <form id="usuario-form" class="form-grid single">
+                    <label>
+                        Usuário
+                        <input id="usuario-username" type="text" placeholder="admin" required>
+                    </label>
+                    <label>
+                        Senha
+                        <input id="usuario-senha" type="password" placeholder="123456" required>
+                    </label>
+                    <label>
+                        Perfil
+                        <select id="usuario-perfil" required>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="FUNCIONARIO">FUNCIONARIO</option>
+                        </select>
+                    </label>
+                    <button type="submit">Cadastrar usuário</button>
+                </form>
+            </details>
+        </div>
+    </section>
+
+    <main id="app" class="app hidden">
+        <aside class="sidebar">
+            <div class="side-brand">
+                <div class="logo">SG</div>
+                <div>
+                    <strong>SGC Games</strong>
+                    <span id="usuario-logado">Usuário</span>
+                </div>
+            </div>
+
+            <nav>
+                <button class="nav-btn active" data-page="dashboard">Dashboard</button>
+                <button class="nav-btn" data-page="clientes">Clientes</button>
+                <button class="nav-btn" data-page="produtos">Produtos</button>
+                <button class="nav-btn" data-page="vendas">Vendas</button>
+                <button class="nav-btn" data-page="relatorios">Relatórios</button>
+                <button class="nav-btn danger" id="logout-btn">Sair</button>
+            </nav>
+        </aside>
+
+        <section class="content">
+            <header class="topbar">
+                <div>
+                    <h2 id="page-title">Dashboard</h2>
+                    <p id="page-subtitle">Resumo geral do sistema</p>
+                </div>
+                <button id="refresh-btn">Atualizar</button>
+            </header>
+
+            <section id="page-dashboard" class="page active-page">
+                <div class="cards">
+                    <article class="stat-card">
+                        <span>Clientes</span>
+                        <strong id="total-clientes">0</strong>
+                    </article>
+                    <article class="stat-card">
+                        <span>Produtos</span>
+                        <strong id="total-produtos">0</strong>
+                    </article>
+                    <article class="stat-card">
+                        <span>Vendas</span>
+                        <strong id="total-vendas">0</strong>
+                    </article>
+                    <article class="stat-card warning">
+                        <span>Estoque baixo</span>
+                        <strong id="total-estoque-baixo">0</strong>
+                    </article>
+                </div>
+            </section>
+
+            <section id="page-clientes" class="page">
+                <div class="panel">
+                    <h3>Cadastro de cliente</h3>
+                    <form id="cliente-form" class="form-grid">
+                        <input type="hidden" id="cliente-id">
+                        <label>Nome<input id="cliente-nome" required></label>
+                        <label>CPF<input id="cliente-cpf" required></label>
+                        <label>Email<input id="cliente-email" type="email" required></label>
+                        <label>Telefone<input id="cliente-telefone"></label>
+                        <label class="full">Endereço<input id="cliente-endereco"></label>
+                        <div class="actions full">
+                            <button type="submit" class="primary">Salvar cliente</button>
+                            <button type="button" id="cliente-limpar">Limpar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <h3>Clientes cadastrados</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr><th>ID</th><th>Nome</th><th>CPF</th><th>Email</th><th>Telefone</th><th>Ações</th></tr>
+                            </thead>
+                            <tbody id="clientes-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-produtos" class="page">
+                <div class="panel">
+                    <h3>Cadastro de produto</h3>
+                    <form id="produto-form" class="form-grid">
+                        <input type="hidden" id="produto-id">
+                        <label>Nome<input id="produto-nome" required></label>
+                        <label>Preço<input id="produto-preco" type="number" step="0.01" min="0" required></label>
+                        <label>Estoque<input id="produto-estoque" type="number" min="0" required></label>
+                        <label>Estoque mínimo<input id="produto-estoque-minimo" type="number" min="0" required></label>
+                        <label>Tipo
+                            <select id="produto-tipo" required>
+                                <option value="CONSOLE">CONSOLE</option>
+                                <option value="JOGO">JOGO</option>
+                                <option value="ACESSORIO">ACESSORIO</option>
+                            </select>
+                        </label>
+                        <label>Plataforma
+                            <select id="produto-plataforma" required>
+                                <option value="PLAYSTATION">PLAYSTATION</option>
+                                <option value="XBOX">XBOX</option>
+                                <option value="NINTENDO">NINTENDO</option>
+                                <option value="MULTIPLATAFORMA">MULTIPLATAFORMA</option>
+                            </select>
+                        </label>
+                        <label class="full">Descrição<input id="produto-descricao"></label>
+                        <div class="actions full">
+                            <button type="submit" class="primary">Salvar produto</button>
+                            <button type="button" id="produto-limpar">Limpar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>Produtos cadastrados</h3>
+                        <button id="btn-estoque-baixo">Ver estoque baixo</button>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr><th>ID</th><th>Nome</th><th>Tipo</th><th>Plataforma</th><th>Preço</th><th>Estoque</th><th>Ações</th></tr>
+                            </thead>
+                            <tbody id="produtos-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-vendas" class="page">
+                <div class="panel">
+                    <h3>Registrar venda</h3>
+                    <form id="venda-form" class="form-grid single">
+                        <label>Cliente<select id="venda-cliente" required></select></label>
+                        <label>Produto<select id="venda-produto" required></select></label>
+                        <label>Quantidade<input id="venda-quantidade" type="number" min="1" value="1" required></label>
+                        <button type="button" id="adicionar-item">Adicionar item</button>
+                    </form>
+
+                    <div class="table-wrap small-space">
+                        <table>
+                            <thead>
+                                <tr><th>Produto</th><th>Qtd</th><th>Preço</th><th>Subtotal</th><th>Ação</th></tr>
+                            </thead>
+                            <tbody id="carrinho-tbody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="sale-footer">
+                        <strong>Total: <span id="venda-total">R$ 0,00</span></strong>
+                        <button id="finalizar-venda" class="primary">Finalizar venda</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Vendas registradas</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr><th>ID</th><th>Data</th><th>Cliente</th><th>Usuário</th><th>Total</th><th>Itens</th></tr>
+                            </thead>
+                            <tbody id="vendas-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-relatorios" class="page">
+                <div class="panel">
+                    <h3>Relatório por período</h3>
+                    <form id="relatorio-periodo-form" class="form-grid">
+                        <label>Início<input id="relatorio-inicio" type="datetime-local" required></label>
+                        <label>Fim<input id="relatorio-fim" type="datetime-local" required></label>
+                        <div class="actions"><button type="submit" class="primary">Buscar</button></div>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <h3>Relatório por cliente</h3>
+                    <form id="relatorio-cliente-form" class="form-grid">
+                        <label>Cliente<select id="relatorio-cliente" required></select></label>
+                        <div class="actions"><button type="submit" class="primary">Buscar</button></div>
+                    </form>
+                </div>
+
+                <div class="panel">
+    <h3>Relatório por produto</h3>
+    <form id="relatorio-produto-form" class="form-grid">
+        <label>Produto<select id="relatorio-produto" required></select></label>
+        <div class="actions"><button type="submit" class="primary">Buscar</button></div>
+    </form>
+</div>
+
+<div class="panel">
+    <h3>Gráfico anual de vendas</h3>
+    <form id="relatorio-anual-form" class="form-grid">
+        <label>Ano<input id="relatorio-ano" type="number" min="2000" max="2100" required></label>
+        <div class="actions"><button type="submit" class="primary">Gerar gráfico</button></div>
+    </form>
+
+    <div id="grafico-anual" class="bar-chart"></div>
+</div>
+
+                <div class="panel">
+                    <h3>Resultado</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr><th>ID</th><th>Data</th><th>Cliente</th><th>Usuário</th><th>Total</th><th>Itens</th></tr>
+                            </thead>
+                            <tbody id="relatorios-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

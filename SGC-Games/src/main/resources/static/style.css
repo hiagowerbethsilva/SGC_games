@@ -1,0 +1,522 @@
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --dark: #111827;
+    --sidebar: #111827;
+    --sidebar-hover: #374151;
+    --background: #eef2f7;
+    --card: #ffffff;
+    --text: #111827;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --soft: #f3f4f6;
+    --danger: #dc2626;
+    --danger-dark: #b91c1c;
+    --success: #16a34a;
+    --warning: #f59e0b;
+    --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --radius: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: 700;
+    background: var(--soft);
+    color: var(--text);
+    transition: 0.2s;
+}
+
+button:hover {
+    filter: brightness(0.96);
+}
+
+button.primary,
+.primary {
+    background: var(--primary);
+    color: white;
+}
+
+button.primary:hover,
+.primary:hover {
+    background: var(--primary-dark);
+}
+
+button.delete,
+.delete {
+    background: var(--danger);
+    color: white;
+}
+
+button.delete:hover,
+.delete:hover {
+    background: var(--danger-dark);
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 12px;
+    outline: none;
+    background: white;
+    color: var(--text);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+label {
+    display: grid;
+    gap: 7px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+th {
+    color: var(--muted);
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+td {
+    font-size: 14px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.login-screen {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: linear-gradient(135deg, #111827, #1e3a8a);
+}
+
+.login-card {
+    width: min(920px, 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--card);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.login-info {
+    padding: 44px;
+    background: #111827;
+    color: white;
+}
+
+.logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: #60a5fa;
+    color: #0f172a;
+    font-weight: 900;
+    margin-bottom: 22px;
+}
+
+.login-info h1 {
+    margin: 0 0 12px;
+    font-size: 34px;
+}
+
+.login-info p {
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+.login-forms {
+    padding: 36px;
+    display: grid;
+    gap: 24px;
+}
+
+.login-forms h2 {
+    margin: 0 0 12px;
+}
+
+.login-forms form {
+    display: grid;
+    gap: 14px;
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background: var(--sidebar);
+    color: white;
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #60a5fa;
+    color: #0f172a;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+}
+
+.brand h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.brand p {
+    margin: 4px 0 0;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.nav {
+    display: grid;
+    gap: 8px;
+}
+
+.nav-btn {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    color: white;
+    padding: 12px 14px;
+    border-radius: 10px;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+    background: var(--sidebar-hover);
+}
+
+.main {
+    padding: 28px;
+    overflow-x: hidden;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.topbar h1 {
+    margin: 0 0 6px;
+    font-size: 28px;
+}
+
+.topbar p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.page {
+    display: none;
+}
+
+.active-page {
+    display: grid;
+    gap: 20px;
+}
+
+.panel {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    border: 1px solid var(--border);
+}
+
+.panel h3 {
+    margin: 0 0 18px;
+    font-size: 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(160px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    border: 1px solid var(--border);
+}
+
+.card span {
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.card strong {
+    display: block;
+    margin-top: 12px;
+    font-size: 34px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 16px;
+    align-items: end;
+}
+
+.form-grid .full {
+    grid-column: 1 / -1;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.row-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.row-actions button {
+    padding: 8px 11px;
+    font-size: 13px;
+}
+
+.toast {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    background: var(--success);
+    color: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    font-weight: 700;
+    z-index: 999;
+    max-width: 360px;
+}
+
+.toast.error {
+    background: var(--danger);
+}
+
+.toast.success {
+    background: var(--success);
+}
+
+.total-box {
+    font-size: 18px;
+    font-weight: 900;
+    margin-top: 14px;
+}
+
+.sale-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.bar-chart {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.bar-row {
+    display: grid;
+    grid-template-columns: 50px 1fr 120px;
+    align-items: center;
+    gap: 12px;
+}
+
+.bar-label {
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.bar-track {
+    height: 18px;
+    background: var(--soft);
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.bar-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 999px;
+    min-width: 2px;
+}
+
+.bar-value {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: var(--soft);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge.danger {
+    background: #fee2e2;
+    color: var(--danger);
+}
+
+.badge.success {
+    background: #dcfce7;
+    color: var(--success);
+}
+
+.empty {
+    padding: 20px;
+    color: var(--muted);
+    text-align: center;
+}
+
+@media (max-width: 1000px) {
+    .app {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+
+    .nav {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .login-card {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .main {
+        padding: 18px;
+    }
+
+    .topbar {
+        flex-direction: column;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .nav {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        padding: 18px;
+    }
+
+    .login-info,
+    .login-forms {
+        padding: 26px;
+    }
+
+    .bar-row {
+        grid-template-columns: 42px 1fr;
+    }
+
+    .bar-value {
+        grid-column: 2;
+    }
+
+    th,
+    td {
+        padding: 10px 8px;
+    }
+}
